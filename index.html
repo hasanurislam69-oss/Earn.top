@@ -1,204 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium Rewards Hub</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-body { font-family: 'Poppins', sans-serif; background: #f0f2f5; padding: 20px; color: #333; margin: 0; }
-h2 { color: #2c3e50; margin-bottom: 10px; text-align: center; }
-p.subtitle { text-align: center; color: #666; margin-bottom: 30px; }
-.container { max-width: 1000px; margin: auto; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Security Rewards</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body { font-family: 'Poppins', sans-serif; background: #f0f4f7; padding: 20px; color: #333; margin: 0; }
+        .container { max-width: 900px; margin: auto; }
+        h2 { text-align: center; color: #2c3e50; }
+        
+        /* Progress Tracker */
+        .progress-box { background: #fff; padding: 15px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .p-bar-bg { width: 100%; background: #e0e0e0; height: 10px; border-radius: 5px; margin-top: 8px; overflow: hidden; }
+        .p-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #27ae60, #2ecc71); transition: 0.8s ease; }
 
-/* Ad Slot */
-.ad-slot {
-text-align: center; margin: 20px auto; min-height: 90px;
-background: #fff; border-radius: 8px; border: 1px solid #ddd;
-display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;
-}
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border-radius: 15px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
+        .card img { width: 100%; height: 150px; border-radius: 10px; object-fit: cover; margin-bottom: 10px; }
+        
+        .btn { 
+            background: #3498db; color: #fff; border: none; padding: 12px; 
+            width: 100%; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+        .btn:disabled { background: #bdc3c7; cursor: not-allowed; }
+        .btn.wait { background: #f39c12; }
+        .btn.verify { background: #e67e22; }
 
-/* Card Styling */
-.card {
-background: white; border-radius: 15px; overflow: hidden;
-box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; border: 2px solid transparent;
-}
-.card img { width: 100%; height: 160px; object-fit: cover; background: #eee; }
-.card-content { padding: 15px; text-align: left; }
-.card-title { font-weight: bold; font-size: 14px; margin-bottom: 10px; min-height: 40px; color: #444; }
+        /* Captcha Modal */
+        #captcha-modal {
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: #fff; padding: 25px; border-radius: 15px; box-shadow: 0 0 50px rgba(0,0,0,0.3);
+            z-index: 1000; text-align: center; width: 300px;
+        }
+        #captcha-modal input { width: 100%; padding: 10px; margin: 15px 0; border: 1px solid #ddd; border-radius: 5px; text-align: center; font-size: 18px; }
+        .overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index: 999; }
 
-.card.active { border-color: #3498db; transform: translateY(-5px); }
-.card.completed { border-color: #27ae60; opacity: 0.7; }
-.card.locked { filter: grayscale(1); opacity: 0.5; cursor: not-allowed; }
-
-.btn {
-background: #3498db; color: white; border: none; padding: 12px;
-border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.2s;
-}
-.btn:disabled { background: #ccc; cursor: not-allowed; }
-.btn.checking { background: #e67e22; }
-
-#final-section {
-display: none; margin-top: 40px; padding: 30px; text-align: center;
-background: #fff; border-radius: 15px; border: 3px dashed #27ae60;
-}
-.code-display { font-size: 28px; color: #27ae60; font-weight: bold; letter-spacing: 2px; margin: 15px 0; }
-</style>
+        .ad-slot { margin: 20px 0; text-align: center; padding: 10px; }
+        #final-reward { display: none; background: #fff; padding: 30px; border-radius: 15px; text-align: center; margin-top: 30px; border: 3px dashed #27ae60; }
+        .code { font-size: 26px; font-weight: bold; color: #27ae60; letter-spacing: 1px; }
+    </style>
 </head>
 <body>
 
+<div class="overlay" id="overlay"></div>
+
 <div class="container">
-<div class="ad-slot">
-<p style="color:#999; font-size:12px; margin-bottom: 5px;">Advertisement</p>
-<script type="text/javascript">
-atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
-</script>
-<script type="text/javascript" src="https://www.highperformanceformat.com/c1ff4e74e792a1739c0b5bb9931163f8/invoke.js"></script>
-</div>
+    <div class="ad-slot">
+        <script type="text/javascript">
+            atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/c1ff4e74e792a1739c0b5bb9931163f8/invoke.js"></script>
+    </div>
 
-<h2>🚀 Exclusive Content Tasks</h2>
-<p class="subtitle">Protyekti task purno korun ebong reward code sangraha korun.</p>
+    <h2>🛡️ Verified Task Hub</h2>
+    
+    <div class="progress-box">
+        <div style="display:flex; justify-content: space-between; font-size: 14px; font-weight: 600;">
+            <span>Completed: <span id="done-count">0</span>/20</span>
+            <span id="pct-text">0%</span>
+        </div>
+        <div class="p-bar-bg"><div class="p-bar-fill" id="p-fill"></div></div>
+    </div>
 
-<div class="grid" id="task-grid"></div>
+    <div class="grid" id="main-grid"></div>
 
-<div id="final-section">
-<h3>🎉 Congratulations!</h3>
-<p>All tasks completed. Your unique access code is:</p>
-<div class="code-display" id="final-code"></div>
-</div>
+    <div id="final-reward">
+        <h3>🎉 Security Check Passed!</h3>
+        <p>Your unique access code is:</p>
+        <div class="code" id="reward-code"></div>
+        <br><br>
+        <button class="btn" onclick="localStorage.clear(); location.reload();" style="background:#666; width:auto;">Reset Progress</button>
+    </div>
 
-<div class="ad-slot" style="margin-top: 50px;">
-<p style="color:#999; font-size:12px; margin-bottom: 5px;">Advertisement</p>
-<script type="text/javascript">
-atOptions = { 'key' : 'eeaa64847c68028bcba08e3d8b2a1ddf', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
-</script>
-<script type="text/javascript" src="https://www.highperformanceformat.com/eeaa64847c68028bcba08e3d8b2a1ddf/invoke.js"></script>
-</div>
+    <div id="captcha-modal">
+        <h3>Human Verify</h3>
+        <p id="math-ques" style="font-size: 20px; font-weight: bold;"></p>
+        <input type="number" id="math-ans" placeholder="Type answer...">
+        <button class="btn" onclick="checkCaptcha()">Submit Answer</button>
+    </div>
 </div>
 
 <script>
-// --- Adsterra Direct Links (20 links) ---
 const links = [
-"https://www.effectivegatecpm.com/v2ykpumtbq?key=64156c1601c9777a06bb9a9680063aa5_1",
-"https://www.effectivegatecpm.com/et4fr64f?key=9e0e21656b3af8b9eb6e6f35e7658ee3_2",
-"https://www.effectivegatecpm.com/ghskuqf4?key=0b0f70bbafd0da9bbd6497a73de36a16_3",
-"https://www.effectivegatecpm.com/uutttvqn3?key=6df72f6fda8e8179b3552dc7ce3483eb_4",
-"https://www.effectivegatecpm.com/z573rm7p?key=7b0d002d8d8e1fbf3e3db56c350c3b36_5",
-"https://www.effectivegatecpm.com/y3rsfj65nf?key=44b57104a36377c1f05bb5a45204d137_6",
-"https://www.effectivegatecpm.com/v0nxwfsecj?key=8c4ef9348a44009983a8f0b529b595fd_7",
-"https://www.effectivegatecpm.com/rp1ik15t?key=f8c385df8f28dee235ecbeb994079ed4_8",
-"https://www.effectivegatecpm.com/d3racg2f?key=3869a35e6e041149fa9bbf299108ce3a_9",
-"https://www.effectivegatecpm.com/fx2cnr3n41?key=483351e0eff737bf7b151b56a09ff046_10",
-"https://www.effectivegatecpm.com/pfwfq5e999?key=30f2fdcc970e4f1e0dfbf1fe136dc40b_11",
-"https://www.effectivegatecpm.com/he1aimdkv0?key=580dc8cb21cdf7cc86ba7623bb0c0040_12",
-"https://www.effectivegatecpm.com/h8q3ih2gu?key=3335bdf1429cf84ddcf658b2a09ade1f_13",
-"https://www.effectivegatecpm.com/k5wn862a?key=e91eef53ee80c6aca41ed4b91e5882d0_14",
-"https://www.effectivegatecpm.com/xzq9ch8g?key=e04ca928e03d740bcf6f948650f74aea_15",
-"https://www.effectivegatecpm.com/hitvbts0an?key=9e53fdb5297ce39a064008e4ba7e82a1_16",
-"https://www.effectivegatecpm.com/n4ed7c39rv?key=0a44a8ffdbbe4bdb185e466f8b416110_17",
-"https://www.effectivegatecpm.com/j1s578pk?key=4546ff89eb8e6fbd51f2413087eb639d_18",
-"https://www.effectivegatecpm.com/ub346upf5x?key=03e2e4060da55b395d4f45294500d25b_19",
-"https://www.effectivegatecpm.com/hz2ddukd?key=2536f15fbdd4ecf61e3f99487bf61e73_20"
+    "https://www.effectivegatecpm.com/v2ykpumtbq?key=64156c1601c9777a06bb9a9680063aa5_1",
+    "https://www.effectivegatecpm.com/et4fr64f?key=9e0e21656b3af8b9eb6e6f35e7658ee3_2",
+    "https://www.effectivegatecpm.com/ghskuqf4?key=0b0f70bbafd0da9bbd6497a73de36a16_3",
+    "https://www.effectivegatecpm.com/uutttvqn3?key=6df72f6fda8e8179b3552dc7ce3483eb_4",
+    "https://www.effectivegatecpm.com/z573rm7p?key=7b0d002d8d8e1fbf3e3db56c350c3b36_5",
+    "https://www.effectivegatecpm.com/y3rsfj65nf?key=44b57104a36377c1f05bb5a45204d137_6",
+    "https://www.effectivegatecpm.com/v0nxwfsecj?key=8c4ef9348a44009983a8f0b529b595fd_7",
+    "https://www.effectivegatecpm.com/rp1ik15t?key=f8c385df8f28dee235ecbeb994079ed4_8",
+    "https://www.effectivegatecpm.com/d3racg2f?key=3869a35e6e041149fa9bbf299108ce3a_9",
+    "https://www.effectivegatecpm.com/fx2cnr3n41?key=483351e0eff737bf7b151b56a09ff046_10",
+    "https://www.effectivegatecpm.com/pfwfq5e999?key=30f2fdcc970e4f1e0dfbf1fe136dc40b_11",
+    "https://www.effectivegatecpm.com/he1aimdkv0?key=580dc8cb21cdf7cc86ba7623bb0c0040_12",
+    "https://www.effectivegatecpm.com/h8q3ih2gu?key=3335bdf1429cf84ddcf658b2a09ade1f_13",
+    "https://www.effectivegatecpm.com/k5wn862a?key=e91eef53ee80c6aca41ed4b91e5882d0_14",
+    "https://www.effectivegatecpm.com/xzq9ch8g?key=e04ca928e03d740bcf6f948650f74aea_15",
+    "https://www.effectivegatecpm.com/hitvbts0an?key=9e53fdb5297ce39a064008e4ba7e82a1_16",
+    "https://www.effectivegatecpm.com/n4ed7c39rv?key=0a44a8ffdbbe4bdb185e466f8b416110_17",
+    "https://www.effectivegatecpm.com/j1s578pk?key=4546ff89eb8e6fbd51f2413087eb639d_18",
+    "https://www.effectivegatecpm.com/ub346upf5x?key=03e2e4060da55b395d4f45294500d25b_19",
+    "https://www.effectivegatecpm.com/hz2ddukd?key=2536f15fbdd4ecf61e3f99487bf61e73_20"
 ];
 
-// --- Automatic Text Generator Config ---
-const topics = ["Tech Review", "Digital Assets", "AI Insights", "Crypto Guide", "Modern Dev", "Web Secrets"];
-const adjectives = ["Premium", "Hidden", "Expert", "Essential", "Top", "Ultimate"];
-function generateTitle() {
-return `${adjectives[Math.floor(Math.random()*adjectives.length)]} ${topics[Math.floor(Math.random()*topics.length)]}`;
+let tasksDone = parseInt(localStorage.getItem('anti_bot_done')) || 0;
+let correctAnswer = 0;
+let currentIdx = null;
+
+function init() {
+    const grid = document.getElementById('main-grid');
+    grid.innerHTML = '';
+    for(let i=0; i<links.length; i++){
+        const card = document.createElement('div');
+        card.className = 'card';
+        let done = i < tasksDone;
+        let active = i === tasksDone;
+        card.innerHTML = `
+            <img src="https://picsum.photos/400/250?random=${i}">
+            <h4>Security Check #${i+1}</h4>
+            <button class="btn" id="btn-${i}" ${active ? '' : 'disabled'} onclick="startTask(${i})">
+                ${done ? '✅ Verified' : (active ? 'Secure & Unlock' : 'Locked')}
+            </button>
+        `;
+        grid.appendChild(card);
+    }
+    updateUI();
 }
 
-// --- Logic Variables ---
-let startTime = null;
-let activeTaskIndex = null;
-const waitTime = 20000; // ২০ সেকেন্ড
-
-// --- Grid Generation ---
-const grid = document.getElementById('task-grid');
-for (let i = 0; i < links.length; i++) {
-const card = document.createElement('div');
-card.className = `card ${i === 0 ? 'active' : 'locked'}`;
-card.id = `card-${i}`;
-card.innerHTML = `
-<img src="https://picsum.photos/400/250?random=${i}" alt="Task Image">
-<div class="card-content">
-<div class="card-title">${generateTitle()} - Task #${i+1}</div>
-<button class="btn" id="btn-${i}" ${i === 0 ? '' : 'disabled'} onclick="startTask(${i})">
-${i === 0 ? 'Read Article' : 'Locked'}
-</button>
-</div>
-`;
-grid.appendChild(card);
+function updateUI() {
+    document.getElementById('done-count').innerText = tasksDone;
+    let pct = Math.floor((tasksDone / links.length) * 100);
+    document.getElementById('pct-text').innerText = pct + "%";
+    document.getElementById('p-fill').style.width = pct + "%";
+    if(tasksDone >= links.length) {
+        document.getElementById('final-reward').style.display = 'block';
+        document.getElementById('reward-code').innerText = localStorage.getItem('final_code') || "REWARD-" + Math.random().toString(36).substr(2,9).toUpperCase();
+        if(!localStorage.getItem('final_code')) localStorage.setItem('final_code', document.getElementById('reward-code').innerText);
+    }
 }
 
-// --- Task Start Function ---
-function startTask(index) {
-activeTaskIndex = index;
-startTime = Date.now(); // ক্লিক করার সময় রেকর্ড করা হলো
-window.open(links[index], '_blank');
-
-const btn = document.getElementById(`btn-${index}`);
-btn.innerText = "Checking... Stay on Ad";
-btn.classList.add('checking');
-btn.disabled = true;
+function startTask(idx) {
+    window.open(links[idx], '_blank', 'noopener,noreferrer');
+    const btn = document.getElementById(`btn-${idx}`);
+    btn.disabled = true;
+    btn.classList.add('wait');
+    
+    // Safety: Variable timer 20-25s
+    let time = 20 + Math.floor(Math.random()*6);
+    let counter = setInterval(() => {
+        time--;
+        btn.innerText = `Verifying... ${time}s`;
+        if(time <= 0) {
+            clearInterval(counter);
+            btn.innerText = "Click to Human Check";
+            btn.classList.replace('wait', 'verify');
+            btn.disabled = false;
+            btn.onclick = () => showCaptcha(idx);
+        }
+    }, 1000);
 }
 
-// --- Back to Tab Focus Check ---
-window.onfocus = function() {
-if (activeTaskIndex !== null && startTime !== null) {
-let currentTime = Date.now();
-let elapsed = currentTime - startTime;
-
-if (elapsed >= waitTime) {
-completeTask(activeTaskIndex);
-} else {
-let left = Math.ceil((waitTime - elapsed) / 1000);
-alert("Aro " + left + " second opekkha korte hbe! Ad page-e fire janh.");
-const btn = document.getElementById(`btn-${activeTaskIndex}`);
-btn.innerText = "Try Again (20s)";
-btn.classList.remove('checking');
-btn.disabled = false;
-}
-}
-};
-
-function completeTask(index) {
-const btn = document.getElementById(`btn-${index}`);
-const card = document.getElementById(`card-${index}`);
-
-btn.innerText = "✅ Completed";
-btn.style.background = "#27ae60";
-btn.classList.remove('checking');
-btn.disabled = true;
-card.classList.replace('active', 'completed');
-
-activeTaskIndex = null;
-startTime = null;
-
-let next = index + 1;
-if (next < links.length) {
-const nextBtn = document.getElementById(`btn-${next}`);
-const nextCard = document.getElementById(`card-${next}`);
-nextBtn.disabled = false;
-nextBtn.innerText = "Read Next";
-nextCard.classList.remove('locked');
-nextCard.classList.add('active');
-nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-} else {
-showFinalCode();
-}
+function showCaptcha(idx) {
+    currentIdx = idx;
+    let n1 = Math.floor(Math.random() * 10) + 1;
+    let n2 = Math.floor(Math.random() * 10) + 1;
+    correctAnswer = n1 + n2;
+    document.getElementById('math-ques').innerText = `${n1} + ${n2} = ?`;
+    document.getElementById('captcha-modal').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
 }
 
-function showFinalCode() {
-const code = "RWD-" + Math.floor(1000 + Math.random() * 8999) + "-" + Math.floor(1000 + Math.random() * 8999);
-document.getElementById('final-code').innerText = code;
-document.getElementById('final-section').style.display = 'block';
-document.getElementById('final-section').scrollIntoView({ behavior: 'smooth' });
+function checkCaptcha() {
+    let userAns = parseInt(document.getElementById('math-ans').value);
+    if(userAns === correctAnswer) {
+        tasksDone = currentIdx + 1;
+        localStorage.setItem('anti_bot_done', tasksDone);
+        document.getElementById('captcha-modal').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('math-ans').value = '';
+        init();
+    } else {
+        alert("Wrong Answer! Try again.");
+    }
 }
+
+init();
 </script>
-
-<script type='text/javascript' src='https://pl28763285.effectivegatecpm.com/c5/56/b8/c556b80211428f0fde689a8b159aa7bf.js'></script>
-
 </body>
 </html>
