@@ -9,7 +9,6 @@
         body { font-family: 'Poppins', sans-serif; background: #f0f2f5; padding: 20px; color: #333; margin: 0; }
         .container { max-width: 1000px; margin: auto; }
         
-        /* অ্যাড স্লট স্টাইল */
         .ad-slot { 
             text-align: center; 
             margin: 20px auto; 
@@ -98,6 +97,20 @@ let currentAnswer = 0;
 
 document.addEventListener("visibilitychange", () => { isTabActive = !document.hidden; });
 
+// Beep Sound Function
+function playBeep() {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
+    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.5);
+}
+
 function buildUI() {
     const grid = document.getElementById('task-grid');
     grid.innerHTML = '';
@@ -112,7 +125,7 @@ function buildUI() {
                 <button class="btn" id="btn-${i}" ${i !== currentTaskIndex || isDone ? 'disabled' : ''} onclick="handleTask(${i})">
                     ${isDone ? '✅ Done' : 'Start Task'}
                 </button>
-                <div id="warn-${i}" class="warning">⚠️ Stay on the ad page for 20s!</div>
+                <div id="warn-${i}" class="warning">⚠️ Stay on the ad page for a few seconds!</div>
                 <div id="math-${i}" class="math-box">
                     <span id="exp-${i}"></span> = <input type="number" id="ans-${i}">
                     <button onclick="verifyMath(${i})">Verify</button>
@@ -129,7 +142,8 @@ function handleTask(index) {
     
     window.open(TASK_LINKS[index], '_blank', 'noopener,noreferrer');
 
-    let timeNeeded = 20; 
+    // 19 theke 25 er modde random time select hobe
+    let timeNeeded = Math.floor(Math.random() * (25 - 19 + 1)) + 19; 
     let passed = 0;
     btn.disabled = true;
 
@@ -144,6 +158,7 @@ function handleTask(index) {
         }
         if (passed >= timeNeeded) {
             clearInterval(timer);
+            playBeep(); // Time sesh hole beep sound
             btn.style.display = 'none';
             warn.style.display = 'none';
             setTimeout(() => showMath(index), 1000);
