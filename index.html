@@ -8,7 +8,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
         body { font-family: 'Poppins', sans-serif; background: #f0f2f5; padding: 20px; color: #333; margin: 0; }
         .container { max-width: 1000px; margin: auto; }
-        .ad-slot { text-align: center; margin: 20px auto; min-height: 90px; background: #fff; border-radius: 8px; border: 1px solid #ddd; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; max-width: 728px; }
+        
+        /* অ্যাড স্লটগুলো হাইড করে রাখা হয়েছে যেন অটোমেটিক লোড না হয় */
+        .ad-slot { display: none; } 
+
         h2 { text-align: center; color: #2c3e50; }
         .sub-text { text-align: center; color: #666; margin-bottom: 30px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
@@ -30,13 +33,6 @@
 <body>
 
 <div class="container">
-    <div class="ad-slot">
-        <script type="text/javascript">
-            atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
-        </script>
-        <script type="text/javascript" src="https://www.highperformanceformat.com/c1ff4e74e792a1739c0b5bb9931163f8/invoke.js"></script>
-    </div>
-
     <h2>🚀 Premium Reward Center</h2>
     <p class="sub-text">কমপ্লিট করুন ২০টি টাস্ক এবং হিউম্যান ভেরিফিকেশন।</p>
 
@@ -47,10 +43,6 @@
         <div class="code-display" id="final-code"></div>
         <br>
         <button class="btn" onclick="resetAll()" style="background:#666; width:auto; padding: 10px 30px;">Reset</button>
-    </div>
-
-    <div class="ad-slot" style="margin-top: 40px;">
-        <script type='text/javascript' src='https://pl28763285.effectivegatecpm.com/c5/56/b8/c556b80211428f0fde689a8b159aa7bf.js'></script>
     </div>
 </div>
 
@@ -113,12 +105,10 @@ function handleTask(index) {
     const btn = document.getElementById(`btn-${index}`);
     const warn = document.getElementById(`warn-${index}`);
     
-    // Human-like Delay before opening ad
-    setTimeout(() => {
-        window.open(TASK_LINKS[index], '_blank', 'noopener,noreferrer');
-    }, Math.floor(Math.random() * 1000) + 500);
+    // ইউজার ক্লিক করার পর অ্যাড ওপেন হবে
+    window.open(TASK_LINKS[index], '_blank', 'noopener,noreferrer');
 
-    let timeNeeded = 20 + Math.floor(Math.random() * 5); // 20 to 24 seconds variation
+    let timeNeeded = 20; 
     let passed = 0;
     btn.disabled = true;
 
@@ -135,8 +125,7 @@ function handleTask(index) {
             clearInterval(timer);
             btn.style.display = 'none';
             warn.style.display = 'none';
-            // Delay showing math to look natural
-            setTimeout(() => showMath(index), 1500);
+            setTimeout(() => showMath(index), 1000);
         }
     }, 1000);
 }
