@@ -1,195 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium Rewards Hub - Complete</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-body { font-family: 'Poppins', sans-serif; background: #f0f2f5; padding: 20px; color: #333; margin: 0; }
-.container { max-width: 1000px; margin: auto; }
-.ad-slot { text-align: center; margin: 20px auto; min-height: 90px; background: #fff; border-radius: 8px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 2px solid transparent; transition: 0.3s; }
-.card.active { border-color: #3498db; transform: translateY(-5px); }
-.card.completed { border-color: #27ae60; opacity: 0.7; }
-.card.locked { filter: grayscale(1); opacity: 0.5; pointer-events: none; }
-.card-content { padding: 15px; }
-.btn { background: #3498db; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s; }
-.btn:disabled { background: #ccc; cursor: not-allowed; }
-.btn.checking { background: #e67e22 !important; }
-.warning { color: #e74c3c; font-size: 13px; margin-top: 8px; display: none; font-weight: 600; }
-#final-section { display: none; margin-top: 40px; padding: 30px; text-align: center; background: #fff; border-radius: 15px; border: 3px dashed #27ae60; }
-.code-display { font-size: 28px; color: #27ae60; font-weight: bold; margin-top: 10px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Rewards Hub - Human Pro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body { font-family: 'Poppins', sans-serif; background: #f0f2f5; padding: 20px; color: #333; margin: 0; }
+        .container { max-width: 1000px; margin: auto; }
+        .ad-slot { text-align: center; margin: 20px auto; min-height: 90px; background: #fff; border-radius: 8px; border: 1px solid #ddd; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; max-width: 728px; }
+        h2 { text-align: center; color: #2c3e50; }
+        .sub-text { text-align: center; color: #666; margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 2px solid transparent; transition: 0.3s; }
+        .card.active { border-color: #3498db; transform: translateY(-5px); }
+        .card.completed { border-color: #27ae60; opacity: 0.7; }
+        .card.locked { filter: grayscale(1); opacity: 0.5; pointer-events: none; }
+        .card-content { padding: 15px; text-align: center; }
+        .btn { background: #3498db; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s; }
+        .btn:disabled { background: #ccc; cursor: not-allowed; }
+        .warning { color: #e74c3c; font-size: 13px; margin-top: 10px; display: none; font-weight: 600; background: #fdeaea; padding: 8px; border-radius: 5px; }
+        .math-box { display: none; background: #fffbe6; padding: 10px; border-radius: 8px; border: 1px solid #ffe58f; margin-top: 10px; }
+        .math-box input { width: 60px; padding: 8px; text-align: center; border: 1px solid #ddd; border-radius: 4px; }
+        .math-box button { background: #27ae60; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-left: 5px; font-weight: bold; }
+        #final-section { display: none; margin-top: 40px; padding: 40px; text-align: center; background: #fff; border-radius: 20px; border: 4px dashed #27ae60; }
+        .code-display { font-size: 36px; color: #27ae60; font-weight: bold; margin-top: 20px; background: #f9f9f9; padding: 15px; border-radius: 10px; }
+    </style>
 </head>
-<body onclick="handleGlobalPop()">
+<body>
 
 <div class="container">
-<div class="ad-slot">
-<script type="text/javascript">
-atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
-</script>
-<script type="text/javascript" src="https://www.highperformanceformat.com/c1ff4e74e792a1739c0b5bb9931163f8/invoke.js"></script>
-</div>
+    <div class="ad-slot">
+        <script type="text/javascript">
+            atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/c1ff4e74e792a1739c0b5bb9931163f8/invoke.js"></script>
+    </div>
 
-<h2 style="text-align:center">🚀 Exclusive Rewards Hub</h2>
-<p style="text-align:center; color: #666;">Complete all 20 tasks to get your premium code!</p>
+    <h2>🚀 Premium Reward Center</h2>
+    <p class="sub-text">কমপ্লিট করুন ২০টি টাস্ক এবং হিউম্যান ভেরিফিকেশন।</p>
 
-<div class="grid" id="task-grid"></div>
+    <div class="grid" id="task-grid"></div>
 
-<div id="final-section">
-<h3>🎉 Congratulations!</h3>
-<p>All tasks completed. Here is your code:</p>
-<div class="code-display" id="final-code"></div>
-<br>
-<button class="btn" onclick="localStorage.clear(); location.reload();" style="background:#666; width:auto;">Reset Everything</button>
-</div>
+    <div id="final-section">
+        <h3>🎉 অভিনন্দন! কোডটি নিচে দেওয়া হলো।</h3>
+        <div class="code-display" id="final-code"></div>
+        <br>
+        <button class="btn" onclick="resetAll()" style="background:#666; width:auto; padding: 10px 30px;">Reset</button>
+    </div>
+
+    <div class="ad-slot" style="margin-top: 40px;">
+        <script type='text/javascript' src='https://pl28763285.effectivegatecpm.com/c5/56/b8/c556b80211428f0fde689a8b159aa7bf.js'></script>
+    </div>
 </div>
 
 <script>
-// --- Configuration & Links ---
 const TASK_LINKS = [
-"https://www.effectivegatecpm.com/v2ykpumtbq?key=64156c1601c9777a06bb9a9680063aa5_1",
-"https://www.effectivegatecpm.com/et4fr64f?key=9e0e21656b3af8b9eb6e6f35e7658ee3_2",
-"https://www.effectivegatecpm.com/ghskuqf4?key=0b0f70bbafd0da9bbd6497a73de36a16_3",
-"https://www.effectivegatecpm.com/uutttvqn3?key=6df72f6fda8e8179b3552dc7ce3483eb_4",
-"https://www.effectivegatecpm.com/z573rm7p?key=7b0d002d8d8e1fbf3e3db56c350c3b36_5",
-"https://www.effectivegatecpm.com/y3rsfj65nf?key=44b57104a36377c1f05bb5a45204d137_6",
-"https://www.effectivegatecpm.com/v0nxwfsecj?key=8c4ef9348a44009983a8f0b529b595fd_7",
-"https://www.effectivegatecpm.com/rp1ik15t?key=f8c385df8f28dee235ecbeb994079ed4_8",
-"https://www.effectivegatecpm.com/d3racg2f?key=3869a35e6e041149fa9bbf299108ce3a_9",
-"https://www.effectivegatecpm.com/fx2cnr3n41?key=483351e0eff737bf7b151b56a09ff046_10",
-"https://www.effectivegatecpm.com/pfwfq5e999?key=30f2fdcc970e4f1e0dfbf1fe136dc40b_11",
-"https://www.effectivegatecpm.com/he1aimdkv0?key=580dc8cb21cdf7cc86ba7623bb0c0040_12",
-"https://www.effectivegatecpm.com/h8q3ih2gu?key=3335bdf1429cf84ddcf658b2a09ade1f_13",
-"https://www.effectivegatecpm.com/k5wn862a?key=e91eef53ee80c6aca41ed4b91e5882d0_14",
-"https://www.effectivegatecpm.com/xzq9ch8g?key=e04ca928e03d740bcf6f948650f74aea_15",
-"https://www.effectivegatecpm.com/hitvbts0an?key=9e53fdb5297ce39a064008e4ba7e82a1_16",
-"https://www.effectivegatecpm.com/n4ed7c39rv?key=0a44a8ffdbbe4bdb185e466f8b416110_17",
-"https://www.effectivegatecpm.com/j1s578pk?key=4546ff89eb8e6fbd51f2413087eb639d_18",
-"https://www.effectivegatecpm.com/ub346upf5x?key=03e2e4060da55b395d4f45294500d25b_19",
-"https://www.effectivegatecpm.com/hz2ddukd?key=2536f15fbdd4ecf61e3f99487bf61e73_20"
+    "https://www.effectivegatecpm.com/v2ykpumtbq?key=64156c1601c9777a06bb9a9680063aa5_1",
+    "https://www.effectivegatecpm.com/et4fr64f?key=9e0e21656b3af8b9eb6e6f35e7658ee3_2",
+    "https://www.effectivegatecpm.com/ghskuqf4?key=0b0f70bbafd0da9bbd6497a73de36a16_3",
+    "https://www.effectivegatecpm.com/uutttvqn3?key=6df72f6fda8e8179b3552dc7ce3483eb_4",
+    "https://www.effectivegatecpm.com/z573rm7p?key=7b0d002d8d8e1fbf3e3db56c350c3b36_5",
+    "https://www.effectivegatecpm.com/y3rsfj65nf?key=44b57104a36377c1f05bb5a45204d137_6",
+    "https://www.effectivegatecpm.com/v0nxwfsecj?key=8c4ef9348a44009983a8f0b529b595fd_7",
+    "https://www.effectivegatecpm.com/rp1ik15t?key=f8c385df8f28dee235ecbeb994079ed4_8",
+    "https://www.effectivegatecpm.com/d3racg2f?key=3869a35e6e041149fa9bbf299108ce3a_9",
+    "https://www.effectivegatecpm.com/fx2cnr3n41?key=483351e0eff737bf7b151b56a09ff046_10",
+    "https://www.effectivegatecpm.com/pfwfq5e999?key=30f2fdcc970e4f1e0dfbf1fe136dc40b_11",
+    "https://www.effectivegatecpm.com/he1aimdkv0?key=580dc8cb21cdf7cc86ba7623bb0c0040_12",
+    "https://www.effectivegatecpm.com/h8q3ih2gu?key=3335bdf1429cf84ddcf658b2a09ade1f_13",
+    "https://www.effectivegatecpm.com/k5wn862a?key=e91eef53ee80c6aca41ed4b91e5882d0_14",
+    "https://www.effectivegatecpm.com/xzq9ch8g?key=e04ca928e03d740bcf6f948650f74aea_15",
+    "https://www.effectivegatecpm.com/hitvbts0an?key=9e53fdb5297ce39a064008e4ba7e82a1_16",
+    "https://www.effectivegatecpm.com/n4ed7c39rv?key=0a44a8ffdbbe4bdb185e466f8b416110_17",
+    "https://www.effectivegatecpm.com/j1s578pk?key=4546ff89eb8e6fbd51f2413087eb639d_18",
+    "https://www.effectivegatecpm.com/ub346upf5x?key=03e2e4060da55b395d4f45294500d25b_19",
+    "https://www.effectivegatecpm.com/hz2ddukd?key=2536f15fbdd4ecf61e3f99487bf61e73_20"
 ];
 
-const WAIT_TIME_MS = 20000;
 let currentTaskIndex = parseInt(localStorage.getItem('user_task_step')) || 0;
-let lastPopTime = 0;
 let isTabActive = true;
+let currentAnswer = 0;
 
-// ১. পপ-আন্ডার লজিক (পেজের যেকোনো জায়গায় ক্লিকে ওপেন হবে)
-function handleGlobalPop() {
-    const now = Date.now();
-    if (now - lastPopTime > 20000) {
-        // Main page focused rakhar jonno window.open bebohar holo
-        window.open(TASK_LINKS[0], '_blank', 'noopener,noreferrer'); 
-        lastPopTime = now;
-    }
-}
+document.addEventListener("visibilitychange", () => { isTabActive = !document.hidden; });
 
-// ২. ট্যাব ডিটেকশন (টাইমার কন্ট্রোল করার জন্য)
-document.addEventListener("visibilitychange", () => {
-    isTabActive = !document.hidden;
-});
-
-// ৩. গ্রিড জেনারেটর
-const grid = document.getElementById('task-grid');
 function buildUI() {
+    const grid = document.getElementById('task-grid');
     grid.innerHTML = '';
     TASK_LINKS.forEach((link, i) => {
         const isDone = i < currentTaskIndex;
-        const isActive = i === currentTaskIndex;
         const card = document.createElement('div');
-        card.className = `card ${isDone ? 'completed' : (isActive ? 'active' : 'locked')}`;
+        card.className = `card ${isDone ? 'completed' : (i === currentTaskIndex ? 'active' : 'locked')}`;
         card.innerHTML = `
             <img src="https://picsum.photos/400/200?random=${i}" style="width:100%">
             <div class="card-content">
-                <div style="font-weight:600;margin-bottom:10px">Premium Task #${i+1}</div>
-                <button class="btn" id="btn-${i}" ${!isActive || isDone ? 'disabled' : ''} onclick="handleTask(${i})">
-                    ${isDone ? '✅ Completed' : 'Unlock Task'}
+                <div style="font-weight:600;margin-bottom:10px">Task #${i+1}</div>
+                <button class="btn" id="btn-${i}" ${i !== currentTaskIndex || isDone ? 'disabled' : ''} onclick="handleTask(${i})">
+                    ${isDone ? '✅ Done' : 'Start Task'}
                 </button>
-                <div id="warn-${i}" class="warning">⚠️ অন্য ট্যাবে গিয়ে ২০ সেকেন্ড থাকুন!</div>
-            </div>
-        `;
+                <div id="warn-${i}" class="warning">⚠️ Stay on the ad page for 20s!</div>
+                <div id="math-${i}" class="math-box">
+                    <span id="exp-${i}"></span> = <input type="number" id="ans-${i}">
+                    <button onclick="verifyMath(${i})">Verify</button>
+                </div>
+            </div>`;
         grid.appendChild(card);
     });
     if (currentTaskIndex >= TASK_LINKS.length) showFinal();
 }
 
-// ৪. টাস্ক লজিক (Modified to keep page active)
 function handleTask(index) {
-    const btn = document.getElementById(`btn-${index}`);
-    const isUnlocked = localStorage.getItem(`unlocked_step_${index}`);
-
-    if (!isUnlocked) {
-        // ১ম ক্লিক: অ্যাড ওপেন হবে নতুন ট্যাবে, মেইন পেজ থেকে বের হবে না
-        window.open(TASK_LINKS[index], '_blank', 'noopener,noreferrer');
-        localStorage.setItem(`unlocked_step_${index}`, "true");
-        btn.innerText = "Start 20s Verification";
-        btn.style.background = "#9b59b6";
-    } else {
-        // ২য় ক্লিক: ভেরিফিকেশন টাইমার শুরু
-        runTimer(index);
-    }
-}
-
-function runTimer(index) {
     const btn = document.getElementById(`btn-${index}`);
     const warn = document.getElementById(`warn-${index}`);
     
-    // আবার অ্যাড ওপেন করা হচ্ছে যদি ইউজার ক্লোজ করে দেয়
-    window.open(TASK_LINKS[index], '_blank', 'noopener,noreferrer');
+    // Human-like Delay before opening ad
+    setTimeout(() => {
+        window.open(TASK_LINKS[index], '_blank', 'noopener,noreferrer');
+    }, Math.floor(Math.random() * 1000) + 500);
 
-    let timeElapsed = 0;
+    let timeNeeded = 20 + Math.floor(Math.random() * 5); // 20 to 24 seconds variation
+    let passed = 0;
     btn.disabled = true;
-    btn.classList.add('checking');
 
-    const countdown = setInterval(() => {
-        // ইউজার যখন অ্যাড এর ট্যাবে (hidden) থাকবে তখন টাইমার চলবে
+    const timer = setInterval(() => {
         if (!isTabActive) {
-            timeElapsed += 1000;
-            btn.innerText = `Verifying... ${Math.ceil((WAIT_TIME_MS - timeElapsed)/1000)}s`;
+            passed++;
+            btn.innerText = `Analyzing... ${timeNeeded - passed}s`;
             warn.style.display = 'none';
         } else {
-            // ইউজার মেইন ট্যাবে ফিরে আসলে টাইমার পজ
             warn.style.display = 'block';
             btn.innerText = "Paused! Go back to Ad";
         }
-
-        if (timeElapsed >= WAIT_TIME_MS) {
-            clearInterval(countdown);
-            completeTask(index);
+        if (passed >= timeNeeded) {
+            clearInterval(timer);
+            btn.style.display = 'none';
+            warn.style.display = 'none';
+            // Delay showing math to look natural
+            setTimeout(() => showMath(index), 1500);
         }
     }, 1000);
 }
 
-function completeTask(index) {
-    currentTaskIndex = index + 1;
-    localStorage.setItem('user_task_step', currentTaskIndex);
-    buildUI();
-    
-    // Auto scroll to next task
-    setTimeout(() => {
-        const nextBtn = document.getElementById(`btn-${currentTaskIndex}`);
-        if(nextBtn) nextBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 500);
+function showMath(index) {
+    const mathBox = document.getElementById(`math-${index}`);
+    const n1 = Math.floor(Math.random() * 15) + 1;
+    const n2 = Math.floor(Math.random() * 10) + 1;
+    currentAnswer = n1 + n2;
+    document.getElementById(`exp-${index}`).innerText = `${n1} + ${n2}`;
+    mathBox.style.display = 'block';
+}
+
+function verifyMath(index) {
+    if (parseInt(document.getElementById(`ans-${index}`).value) === currentAnswer) {
+        currentTaskIndex++;
+        localStorage.setItem('user_task_step', currentTaskIndex);
+        buildUI();
+    } else {
+        alert("Wrong! Try again.");
+    }
 }
 
 function showFinal() {
     document.getElementById('final-section').style.display = 'block';
-    let savedCode = localStorage.getItem('final_reward_code');
-    if(!savedCode) {
-        savedCode = "RWD-" + Math.floor(100000 + Math.random() * 900000);
-        localStorage.setItem('final_reward_code', savedCode);
-    }
-    document.getElementById('final-code').innerText = savedCode;
     document.getElementById('task-grid').style.display = 'none';
+    let code = localStorage.getItem('final_reward_code') || ("PRO-" + Math.random().toString(36).substr(2, 9).toUpperCase());
+    localStorage.setItem('final_reward_code', code);
+    document.getElementById('final-code').innerText = code;
 }
 
+function resetAll() { localStorage.clear(); location.reload(); }
 buildUI();
 </script>
-
-<script type='text/javascript' src='https://pl28763285.effectivegatecpm.com/c5/56/b8/c556b80211428f0fde689a8b159aa7bf.js'></script>
-
 </body>
 </html>
