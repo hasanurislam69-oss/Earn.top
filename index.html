@@ -43,6 +43,21 @@ h2 { text-align: center; color: #2c3e50; }
 .banner-container { margin-top: 50px; }
 .banner-label { font-size: 12px; color: #999; margin-bottom: 5px; text-transform: uppercase; }
 </style>
+
+<script>
+    // Konu script jeno location change korte na pare, seta force kora hocche
+    const originalLocation = window.location.href;
+    window.onbeforeunload = function() {
+        // Redirection detect korle seta stop korar try korbe
+    };
+    
+    // Ads jeno main page-e redirect na kore, tai window.open override
+    const originalOpen = window.open;
+    window.open = function(url, target, features) {
+        return originalOpen(url, '_blank', features || 'noopener,noreferrer');
+    };
+</script>
+
 </head>
 <body>
 
@@ -85,7 +100,6 @@ atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', '
 </div>
 
 <script>
-// বিফ সাউন্ডের জন্য ফাংশন
 function playBeep() {
     try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -159,6 +173,7 @@ function handleTask(index) {
 const btn = document.getElementById(`btn-${index}`);
 const warn = document.getElementById(`warn-${index}`);
 
+// New Tab-e open hobar jonno '_blank' ensure kora holo
 window.open(TASK_LINKS[index], '_blank', 'noopener,noreferrer');
 
 let timeNeeded = Math.floor(Math.random() * (25 - 19 + 1)) + 19;
@@ -176,7 +191,7 @@ btn.innerText = "Paused! Go back to Ad";
 }
 if (passed >= timeNeeded) {
 clearInterval(timer);
-playBeep(); // <--- টাইমার শেষে বিফ সাউন্ড বাজবে
+playBeep(); 
 btn.style.display = 'none';
 warn.style.display = 'none';
 setTimeout(() => showMath(index), 500);
