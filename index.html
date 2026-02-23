@@ -11,25 +11,21 @@ body { font-family: 'Poppins', sans-serif; background: #f0f2f5; padding: 20px; c
 
 .ad-slot {
 text-align: center;
-margin: 15px auto;
-min-height: 50px;
+margin: 20px auto;
+min-height: 90px;
 background: #fff;
 border-radius: 8px;
-border: 1px solid #eee;
+border: 1px solid #ddd;
 display: flex;
-flex-direction: column;
 align-items: center;
 justify-content: center;
 overflow: hidden;
-padding: 10px;
 }
-
-.native-ad-box { margin: 20px 0; border: 1px dashed #bbb; padding: 10px; background: #fafafa; }
 
 h2 { text-align: center; color: #2c3e50; }
 .sub-text { text-align: center; color: #666; margin-bottom: 30px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 2px solid transparent; transition: 0.3s; margin-bottom: 20px; }
+.card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 2px solid transparent; transition: 0.3s; }
 .card.active { border-color: #3498db; transform: translateY(-5px); }
 .card.completed { border-color: #27ae60; opacity: 0.7; }
 .card.locked { filter: grayscale(1); opacity: 0.5; pointer-events: none; }
@@ -59,7 +55,7 @@ atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', '
 <h2>🚀 Premium Reward Center</h2>
 <p class="sub-text">কমপ্লিট করুন ২০টি টাস্ক এবং হিউম্যান ভেরিফিকেশন।</p>
 
-<div id="task-grid" class="grid"></div>
+<div class="grid" id="task-grid"></div>
 
 <div id="final-section">
 <h3>🎉 অভিনন্দন! কোডটি নিচে দেওয়া হলো।</h3>
@@ -67,6 +63,7 @@ atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', '
 <br>
 <button class="btn" onclick="resetAll()" style="background:#666; width:auto; padding: 10px 30px;">Reset</button>
 </div>
+
 </div>
 
 <script>
@@ -112,40 +109,6 @@ oscillator.start();
 oscillator.stop(audioCtx.currentTime + 0.5);
 }
 
-// Banner ads function from Project 1
-function getBannerAds() {
-return `
-<div class="ad-slot">
-<script type="text/javascript"> atOptions = { 'key' : 'eeaa64847c68028bcba08e3d8b2a1ddf', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} }; </scr`+`ipt>
-<script src="https://balkliving.com/eeaa64847c68028bcba08e3d8b2a1ddf/invoke.js"></scr`+`ipt>
-</div>
-<div class="ad-slot">
-<script type="text/javascript"> atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </scr`+`ipt>
-<script src="https://balkliving.com/c1ff4e74e792a1739c0b5bb9931163f8/invoke.js"></scr`+`ipt>
-</div>
-<div class="ad-slot">
-<script type="text/javascript"> atOptions = { 'key' : 'c2564a2eeb5b5355016efaa27e8d63d8', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} }; </scr`+`ipt>
-<script src="https://balkliving.com/c2564a2eeb5b5355016efaa27e8d63d8/invoke.js"></scr`+`ipt>
-</div>
-<div class="ad-slot">
-<script type="text/javascript"> atOptions = { 'key' : '734920ac121dfa73df59827e630d0846', 'format' : 'iframe', 'height' : 300, 'width' : 160, 'params' : {} }; </scr`+`ipt>
-<script src="https://balkliving.com/734920ac121dfa73df59827e630d0846/invoke.js"></scr`+`ipt>
-</div>
-<div class="ad-slot">
-<script type="text/javascript"> atOptions = { 'key' : '8d8437eb8e7c97a70d4f2efd5f13f0c0', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </scr`+`ipt>
-<script src="https://balkliving.com/8d8437eb8e7c97a70d4f2efd5f13f0c0/invoke.js"></scr`+`ipt>
-</div>`;
-}
-
-function getNativeAd() {
-return `
-<div class="ad-slot native-ad-box">
-<p style="font-size:10px; color:#999; margin:0">SPONSORED CONTENT</p>
-<script async="async" data-cfasync="false" src="https://balkliving.com/8240b097667a82ab7389e91cc1d33a22/invoke.js"></scr`+`ipt>
-<div id="container-8240b097667a82ab7389e91cc1d33a22"></div>
-</div>`;
-}
-
 function buildUI() {
 const grid = document.getElementById('task-grid');
 grid.innerHTML = '';
@@ -167,14 +130,6 @@ ${isDone ? '✅ Done' : 'Start Task'}
 </div>
 </div>`;
 grid.appendChild(card);
-
-// Adding Ads after every 2 tasks (from Project 1 logic)
-if ((i + 1) % 2 === 0) {
-const adWrapper = document.createElement('div');
-adWrapper.style.gridColumn = "1 / -1"; // Makes ad span full width in grid
-adWrapper.innerHTML = getBannerAds() + getNativeAd();
-grid.appendChild(adWrapper);
-}
 });
 if (currentTaskIndex >= TASK_LINKS.length) showFinal();
 }
@@ -219,7 +174,6 @@ if (parseInt(document.getElementById(`ans-${index}`).value) === currentAnswer) {
 currentTaskIndex++;
 localStorage.setItem('user_task_step', currentTaskIndex);
 buildUI();
-window.scrollTo(0, 0);
 } else {
 alert("Wrong! Try again.");
 }
