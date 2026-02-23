@@ -3,93 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Impression Server v4.0</title>
+    <title>Secure Impression Engine v5.0</title>
     <style>
-        body { background: #050505; color: #00ff41; font-family: 'Courier New', monospace; text-align: center; padding: 50px; margin: 0; }
-        .monitor { border: 2px solid #00ff41; padding: 20px; display: inline-block; background: #000; box-shadow: 0 0 15px #00ff41; border-radius: 10px; width: 80%; max-width: 600px; }
+        body { background: #050505; color: #00ff41; font-family: 'Courier New', monospace; text-align: center; padding: 20px; overflow-x: hidden; }
+        .monitor { border: 2px solid #00ff41; padding: 20px; display: inline-block; background: #000; box-shadow: 0 0 15px #00ff41; border-radius: 10px; width: 90%; max-width: 600px; margin-bottom: 500px; /* স্ক্রলিং এর জন্য অতিরিক্ত স্পেস */ }
         .danger { color: #ff0000; font-weight: bold; text-shadow: 0 0 5px #ff0000; }
+        .status-text { font-size: 14px; margin: 10px 0; }
         .loading-bar { width: 100%; background: #111; height: 10px; margin: 20px 0; border-radius: 5px; overflow: hidden; }
-        .progress { width: 0%; height: 100%; background: #00ff41; transition: 0.5s; }
-        #ad-factory { display: none; } /* ডিফল্টভাবে অ্যাড হাইড থাকবে */
+        .progress { width: 0%; height: 100%; background: #00ff41; transition: 1s ease-in-out; }
+        #ad-factory { opacity: 0.01; position: absolute; top: -1000px; } /* ইনভিজিবল কিন্তু লোড হবে */
     </style>
 </head>
 <body>
 
     <div class="monitor">
-        <h2>🛡️ SYSTEM FIREWALL ACTIVE</h2>
+        <h2>🛡️ NEURAL FIREWALL ACTIVE</h2>
         <hr border="1" color="#00ff41">
-        <div id="status-box">
-            <p>Detection Status: <span id="proxy-status">Scanning...</span></p>
-            <p>Your IP: <span id="user-ip">Checking...</span></p>
+        <div class="status-box">
+            <p class="status-text">Network: <span id="proxy-status">Analyzing...</span></p>
+            <p class="status-text">Identity: <span id="user-ip">Verifying...</span></p>
+            <p class="status-text">Behavior: <span id="behavior-status">Idle</span></p>
         </div>
         <div class="loading-bar"><div id="bar" class="progress"></div></div>
-        <p>Impression Multiplier: <span id="imp-count">0</span> / 100</p>
-        <p style="font-size: 12px; color: #888;">Note: System will stop if Proxy/VPN leaks.</p>
+        <p>Impression Sync: <span id="imp-count">0</span>%</p>
+        <p style="font-size: 10px; color: #555;">Human Behavior Simulation Enabled.</p>
     </div>
 
     <div id="ad-factory">
-        <script>
-            const adKeys = [
-                'eeaa64847c68028bcba08e3d8b2a1ddf', 'c2564a2eeb5b5355016efaa27e8d63d8',
-                '734920ac121dfa73df59827e630d0846', '8d8437eb8e7c97a70d4f2efd5f13f0c0',
-                'be4dff40e94219a60bf289a7a65bd083', '2180d3147d5aa2a94048ad63a1cdfa9c'
-            ];
-
-            // ১ ভিউতে ১০০ ইমপ্রেশন করতে লুপ বাড়ানো হয়েছে
-            for(let i=0; i<5; i++) { 
-                adKeys.forEach(key => {
-                    document.write(`<div style="width:1px;height:1px;overflow:hidden;">
-                        <script type="text/javascript">
-                            atOptions = { 'key' : '${key}', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
-                        <\/script>
-                        <script type="text/javascript" src="https://balkliving.com/${key}/invoke.js"><\/script>
-                    </div>`);
-                });
-            }
-        </script>
-
-        <script src="https://balkliving.com/ee/6c/3d/ee6c3d0209445502d9bada921648f176.js"></script>
-        <script src="https://balkliving.com/64/6c/5e/646c5ef6f88ac045448d749a8e047fca.js"></script>
-        <script src="https://balkliving.com/c5/56/b8/c556b80211428f0fde689a8b159aa7bf.js"></script>
-    </div>
+        </div>
 
     <script>
+        // ১. র‍্যান্ডম টাইম জেনারেটর (মানুষের মতো বিরতি)
+        function getRandomTime(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        // ২. অটোমেটিক হিউম্যান স্ক্রলিং (Smooth Scroll)
+        async function simulateScrolling() {
+            const scrollHeight = document.body.scrollHeight;
+            const step = 200; 
+            for (let i = 0; i < scrollHeight; i += step) {
+                window.scrollTo({ top: i, behavior: 'smooth' });
+                document.getElementById('behavior-status').innerText = "Scrolling Content...";
+                await new Promise(r => setTimeout(r, getRandomTime(800, 1500)));
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ৩. সিকিউরিটি চেক
         async function checkSecurity() {
             try {
-                // আইপি এবং ভিপিএন চেক করার জন্য একটি ফ্রি এপিআই (ip-api.com)
                 const response = await fetch('https://ipapi.co/json/');
                 const data = await response.json();
-                
                 document.getElementById('user-ip').innerText = data.ip;
-                
-                // যদি আইপি বাংলাদেশ হয় এবং আপনি ভিপিএন টার্গেট করেন, তবে এটি ওয়ার্নিং দেবে
+
                 if(data.country_code === 'BD') {
-                    document.getElementById('proxy-status').innerHTML = "<span class='danger'>VPN DISCONNECTED (LOCAL IP)</span>";
-                    alert("Warning: Real IP Detected! Turn on VPN.");
+                    document.getElementById('proxy-status').innerHTML = "<span class='danger'>VPN LEAK DETECTED</span>";
+                    alert("Real IP Exposed! System Paused.");
                 } else {
                     document.getElementById('proxy-status').innerText = "SECURE (" + data.country_name + ")";
-                    startImpressionLoop();
+                    startSmartLoop();
                 }
-            } catch (error) {
-                document.getElementById('proxy-status').innerText = "Security Engine Error - Ads Paused";
+            } catch (e) {
+                document.getElementById('proxy-status').innerText = "Network Error";
             }
         }
 
-        let totalImp = 0;
-        function startImpressionLoop() {
+        let totalProgress = 0;
+        
+        // ৪. স্মার্ট ইমপ্রেশন লুপ (র‍্যান্ডম বিরতিসহ)
+        async function startSmartLoop() {
             document.getElementById('ad-factory').style.display = 'block';
-            let bar = document.getElementById('bar');
             
-            setInterval(() => {
-                if(totalImp < 100) {
-                    totalImp += 5;
-                    document.getElementById('imp-count').innerText = totalImp;
-                    bar.style.width = totalImp + "%";
-                } else {
-                    // ১০০ ইমপ্রেশন হয়ে গেলে অটো রিলোড করে আবার শুরু হবে
-                    location.reload();
+            while(totalProgress < 100) {
+                // র‍্যান্ডম প্রগ্রেস (৫ থেকে ১২ এর মধ্যে)
+                let increment = getRandomTime(5, 12);
+                totalProgress += increment;
+                if(totalProgress > 100) totalProgress = 100;
+
+                document.getElementById('imp-count').innerText = totalProgress;
+                document.getElementById('bar').style.width = totalProgress + "%";
+                document.getElementById('behavior-status').innerText = "Analyzing Metadata...";
+
+                // মানুষের মতো স্ক্রলিং শুরু
+                if(totalProgress > 20 && totalProgress < 80) {
+                    await simulateScrolling();
                 }
-            }, 5000); // প্রতি ৫ সেকেন্ডে ইমপ্রেশন কাউন্ট আপডেট হবে
+
+                // র‍্যান্ডম ওয়েটিং টাইম (৮ থেকে ২০ সেকেন্ড) - এটি বট ডিটেকশন এড়ায়
+                let waitTime = getRandomTime(8000, 20000);
+                console.log(`Waiting for ${waitTime/1000} seconds...`);
+                await new Promise(r => setTimeout(r, waitTime));
+            }
+
+            // ১০০% হয়ে গেলে রিলোড
+            document.getElementById('behavior-status').innerText = "Session Complete. Syncing...";
+            setTimeout(() => location.reload(), 3000);
         }
 
         window.onload = checkSecurity;
