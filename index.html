@@ -3,50 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium Rewards Hub - Ultra Pro</title>
+<title>Premium Rewards Hub - Elite Pro</title>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-body { font-family: 'Poppins', sans-serif; background: #f0f2f5; padding: 20px; color: #333; margin: 0; overflow-x: hidden; }
+body { font-family: 'Poppins', sans-serif; background: #f0f2f5; padding: 20px; color: #333; margin: 0; }
 .container { max-width: 1000px; margin: auto; }
 
 /* Ad Slot Styling */
 .ad-slot {
     text-align: center;
     margin: 20px auto;
-    min-height: 100px;
+    min-height: 90px;
     background: #fff;
-    border-radius: 12px;
-    border: 1px solid #eee;
+    border-radius: 8px;
+    border: 1px solid #ddd;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    transition: 0.3s;
+    flex-direction: column;
 }
 
-h2 { text-align: center; color: #2c3e50; margin-top: 10px; }
+h2 { text-align: center; color: #2c3e50; }
 .sub-text { text-align: center; color: #666; margin-bottom: 30px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 2px solid transparent; transition: 0.3s; }
-.card.active { border-color: #3498db; transform: scale(1.02); }
+.card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 2px solid transparent; transition: 0.3s; position: relative; }
+.card.active { border-color: #3498db; transform: translateY(-5px); }
 .card.completed { border-color: #27ae60; opacity: 0.7; }
 .card.locked { filter: grayscale(1); opacity: 0.5; pointer-events: none; }
 .card-content { padding: 15px; text-align: center; }
-.btn { background: #3498db; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; }
-.btn:disabled { background: #ccc; }
+
+.btn { background: #3498db; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s; }
+.btn:disabled { background: #ccc; cursor: not-allowed; }
+
 .warning { color: #e74c3c; font-size: 13px; margin-top: 10px; display: none; font-weight: 600; background: #fdeaea; padding: 8px; border-radius: 5px; }
 .math-box { display: none; background: #fffbe6; padding: 10px; border-radius: 8px; border: 1px solid #ffe58f; margin-top: 10px; }
-.math-box input { width: 60px; padding: 8px; text-align: center; border: 1px solid #ddd; }
+.math-box input { width: 60px; padding: 8px; text-align: center; border: 1px solid #ddd; border-radius: 4px; }
+.math-box button { background: #27ae60; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-left: 5px; font-weight: bold; }
+
 #final-section { display: none; margin-top: 40px; padding: 40px; text-align: center; background: #fff; border-radius: 20px; border: 4px dashed #27ae60; }
-.code-display { font-size: 36px; color: #27ae60; font-weight: bold; margin-top: 20px; }
+.code-display { font-size: 36px; color: #27ae60; font-weight: bold; margin-top: 20px; background: #f9f9f9; padding: 15px; border-radius: 10px; }
+.banner-label { font-size: 11px; color: #aaa; margin-bottom: 5px; text-transform: uppercase; }
 </style>
 
 <script>
-    // --- 🛡️ ADVANCED REDIRECT PROTECTION ---
-    // পেজ থেকে বের হয়ে যাওয়া বা অন্য সাইটে চলে যাওয়া আটকাবে
-    window.onbeforeunload = function() { return "Finish your tasks to get the reward!"; };
+    /* --- 🛡️ ULTRA REDIRECT PROTECTOR --- */
+    // এটি ভিপিএন ইউজ করার সময় অ্যাড নেটওয়ার্কের অটো-রিডাইরেক্ট ব্লক করবে
+    window.onbeforeunload = function() { return "Don't leave! Complete tasks to get the code."; };
 
-    // ব্যাক বাটন হাইজ্যাকিং রোধ
+    // ব্যাক-বাটন প্রোটেকশন
     (function(){
         history.pushState(null, document.title, location.href);
         window.addEventListener('popstate', function(){
@@ -54,29 +59,24 @@ h2 { text-align: center; color: #2c3e50; margin-top: 10px; }
         });
     })();
 
-    // ক্লিপবোর্ড এবং পপআপ প্রোটেকশন
-    window.open = (function(open) {
-        return function(url, name, features) {
-            console.log("Safe-Opening URL:", url);
-            return open.call(window, url, name, features);
-        };
-    })(window.open);
+    // পপআপ এবং রিডাইরেক্ট ফিল্টারিং
+    const originalOpen = window.open;
+    window.open = function(url, name, specs) {
+        console.log("Blocking suspicious redirect to: " + url);
+        return originalOpen(url, name, specs);
+    };
 </script>
 </head>
 <body>
 
 <script type='text/javascript' src='//pl28763285.effectivegatecpm.com/c5/56/b8/c556b80211428f0fde689a8b159aa7bf.js'></script>
-
 <div class="container">
+    <div class="ad-slot" id="top-ad">
+        <div class="banner-label">Premium Sponsor</div>
+        </div>
+
     <h2>🚀 Premium Reward Center</h2>
     <p class="sub-text">কমপ্লিট করুন ২০টি টাস্ক এবং হিউম্যান ভেরিফিকেশন।</p>
-
-    <div class="ad-slot">
-        <script type="text/javascript">
-            atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
-        </script>
-        <script src="https://balkliving.com/c1ff4e74e792a1739c0b5bb9931163f8/invoke.js"></script>
-    </div>
 
     <div class="grid" id="task-grid"></div>
 
@@ -87,9 +87,11 @@ h2 { text-align: center; color: #2c3e50; margin-top: 10px; }
         <button class="btn" onclick="resetAll()" style="background:#666; width:auto; padding: 10px 30px;">Reset</button>
     </div>
 
-    <div class="banner-container" id="ad-container">
-        <h3 style="text-align: center; color: #666; margin-top: 50px;">Sponsored Offers</h3>
-        </div>
+    <div class="banner-container">
+        <h3 style="text-align: center; color: #666; margin-bottom: 20px;">Sponsored Ads</h3>
+        <div id="dynamic-ads-container">
+            </div>
+    </div>
 </div>
 
 <script>
@@ -122,17 +124,6 @@ let currentAnswer = 0;
 
 document.addEventListener("visibilitychange", () => { isTabActive = !document.hidden; });
 
-// 🔊 Beep Sound
-function playBeep() {
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-    oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
-    oscillator.type = 'sine'; oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
-    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-    oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.5);
-}
-
 function buildUI() {
     const grid = document.getElementById('task-grid');
     grid.innerHTML = '';
@@ -147,10 +138,10 @@ function buildUI() {
                 <button class="btn" id="btn-${i}" ${i !== currentTaskIndex || isDone ? 'disabled' : ''} onclick="handleTask(${i})">
                     ${isDone ? '✅ Done' : 'Start Task'}
                 </button>
-                <div id="warn-${i}" class="warning">⚠️ Stay on the ad page for a few seconds!</div>
+                <div id="warn-${i}" class="warning">⚠️ Stay on the ad page!</div>
                 <div id="math-${i}" class="math-box">
                     <span id="exp-${i}"></span> = <input type="number" id="ans-${i}">
-                    <button onclick="verifyMath(${i})" style="padding: 8px; cursor:pointer; background:#27ae60; color:#fff; border:none; border-radius:4px;">Verify</button>
+                    <button onclick="verifyMath(${i})">Verify</button>
                 </div>
             </div>`;
         grid.appendChild(card);
@@ -163,7 +154,7 @@ function handleTask(index) {
     const warn = document.getElementById(`warn-${index}`);
     window.open(TASK_LINKS[index], '_blank', 'noopener,noreferrer');
     
-    let timeNeeded = Math.floor(Math.random() * (15 - 10 + 1)) + 10; // দ্রুত করার জন্য সময় কমানো হয়েছে
+    let timeNeeded = 12; // VPN ইউজারদের জন্য ১২ সেকেন্ড সেফ টাইম
     let passed = 0;
     btn.disabled = true;
 
@@ -174,21 +165,20 @@ function handleTask(index) {
             warn.style.display = 'none';
         } else {
             warn.style.display = 'block';
-            btn.innerText = "Paused! Go back to Ad";
+            btn.innerText = "Wait... Go back to Ad";
         }
         if (passed >= timeNeeded) {
             clearInterval(timer);
-            playBeep();
             btn.style.display = 'none';
             warn.style.display = 'none';
-            setTimeout(() => showMath(index), 500);
+            showMath(index);
         }
     }, 1000);
 }
 
 function showMath(index) {
     const mathBox = document.getElementById(`math-${index}`);
-    const n1 = Math.floor(Math.random() * 15) + 1;
+    const n1 = Math.floor(Math.random() * 10) + 2;
     const n2 = Math.floor(Math.random() * 10) + 1;
     currentAnswer = n1 + n2;
     document.getElementById(`exp-${index}`).innerText = `${n1} + ${n2}`;
@@ -196,14 +186,11 @@ function showMath(index) {
 }
 
 function verifyMath(index) {
-    const val = parseInt(document.getElementById(`ans-${index}`).value);
-    if (val === currentAnswer) {
+    if (parseInt(document.getElementById(`ans-${index}`).value) === currentAnswer) {
         currentTaskIndex++;
         localStorage.setItem('user_task_step', currentTaskIndex);
         buildUI();
-    } else {
-        alert("Wrong! Try again.");
-    }
+    } else { alert("Wrong answer!"); }
 }
 
 function showFinal() {
@@ -216,32 +203,54 @@ function showFinal() {
 
 function resetAll() { localStorage.clear(); location.reload(); }
 
-// --- 🛡️ LAZY LOAD ADS (ধীরে ধীরে লোড হবে যাতে সাইট হ্যাং না হয়) ---
-function loadAds() {
-    const adContainer = document.getElementById('ad-container');
-    const adKeys = ['eeaa64847c68028bcba08e3d8b2a1ddf', 'c1ff4e74e792a1739c0b5bb9931163f8', 'c2564a2eeb5b5355016efaa27e8d63d8', '734920ac121dfa73df59827e630d0846', '8d8437eb8e7c97a70d4f2efd5f13f0c0'];
+/* --- 🛡️ ADVANCED BANNER INJECTOR (2 Sec Delay) --- */
+function injectBanner(containerId, adKey) {
+    const container = document.getElementById(containerId);
+    const scriptConfig = document.createElement('script');
+    scriptConfig.type = 'text/javascript';
+    scriptConfig.text = `atOptions = { 'key' : '${adKey}', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };`;
     
-    adKeys.forEach((key, index) => {
+    const scriptSrc = document.createElement('script');
+    scriptSrc.type = 'text/javascript';
+    scriptSrc.src = `https://balkliving.com/${adKey}/invoke.js`;
+    
+    container.appendChild(scriptConfig);
+    container.appendChild(scriptSrc);
+}
+
+function startLoadingAds() {
+    const adKeys = [
+        'eeaa64847c68028bcba08e3d8b2a1ddf', 'c1ff4e74e792a1739c0b5bb9931163f8',
+        'c2564a2eeb5b5355016efaa27e8d63d8', '734920ac121dfa73df59827e630d0846',
+        '8d8437eb8e7c97a70d4f2efd5f13f0c0', 'be4dff40e94219a60bf289a7a65bd083',
+        '2180d3147d5aa2a94048ad63a1cdfa9c', '8d8437eb8e7c97a70d4f2efd5f13f0c0',
+        'be4dff40e94219a60bf289a7a65bd083', '2180d3147d5aa2a94048ad63a1cdfa9c'
+    ];
+
+    const target = document.getElementById('dynamic-ads-container');
+    
+    // Top ad লোড
+    injectBanner('top-ad', 'c1ff4e74e792a1739c0b5bb9931163f8');
+
+    // বাকি ১০টি অ্যাড ২ সেকেন্ড পর পর লোড হবে
+    adKeys.forEach((key, i) => {
         setTimeout(() => {
-            let div = document.createElement('div');
+            const div = document.createElement('div');
             div.className = 'ad-slot';
-            div.innerHTML = `<iframe src="about:blank" style="border:none; width:320px; height:50px;" id="ifr-${index}"></iframe>`;
-            adContainer.appendChild(div);
-            // Injecting ad into iframe to sandbox it
-            let ifr = document.getElementById(`ifr-${index}`).contentWindow.document;
-            ifr.open();
-            ifr.write(`<script type="text/javascript">atOptions={'key':'${key}','format':'iframe','height':50,'width':320,'params':{}};</script>
-                       <script src="https://balkliving.com/${key}/invoke.js"></script>`);
-            ifr.close();
-        }, index * 2000); // প্রতি ২ সেকেন্ডে একটি করে অ্যাড লোড হবে
+            div.id = `dyn-slot-${i}`;
+            div.innerHTML = `<div class="banner-label">Ad Slot #${i+1}</div>`;
+            target.appendChild(div);
+            injectBanner(`dyn-slot-${i}`, key);
+        }, (i + 1) * 2000); 
     });
 }
 
-buildUI();
-window.onload = loadAds;
+window.onload = function() {
+    buildUI();
+    startLoadingAds();
+};
 </script>
 
 <script src="https://balkliving.com/64/6c/5e/646c5ef6f88ac045448d749a8e047fca.js"></script>
-
 </body>
 </html>
