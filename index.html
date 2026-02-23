@@ -70,12 +70,37 @@ atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', '
 
 <div class="banner-container">
 <h3 style="text-align: center; color: #666; margin-bottom: 20px;">Sponsored Ads</h3>
+
 <div class="ad-slot"><div class="banner-label">Ad Slot #1</div><script>atOptions={'key':'eeaa64847c68028bcba08e3d8b2a1ddf','format':'iframe','height':50,'width':320,'params':{}};</script><script src="https://balkliving.com/eeaa64847c68028bcba08e3d8b2a1ddf/invoke.js"></script></div>
 <div class="ad-slot"><div class="banner-label">Ad Slot #2</div><script>atOptions={'key':'c1ff4e74e792a1739c0b5bb9931163f8','format':'iframe','height':60,'width':468,'params':{}};</script><script src="https://balkliving.com/c1ff4e74e792a1739c0b5bb9931163f8/invoke.js"></script></div>
+<div class="ad-slot"><div class="banner-label">Ad Slot #3</div><script>atOptions={'key':'c2564a2eeb5b5355016efaa27e8d63d8','format':'iframe','height':250,'width':300,'params':{}};</script><script src="https://balkliving.com/c2564a2eeb5b5355016efaa27e8d63d8/invoke.js"></script></div>
+<div class="ad-slot"><div class="banner-label">Ad Slot #4</div><script>atOptions={'key':'734920ac121dfa73df59827e630d0846','format':'iframe','height':300,'width':160,'params':{}};</script><script src="https://balkliving.com/734920ac121dfa73df59827e630d0846/invoke.js"></script></div>
+<div class="ad-slot"><div class="banner-label">Ad Slot #5</div><script>atOptions={'key':'8d8437eb8e7c97a70d4f2efd5f13f0c0','format':'iframe','height':60,'width':468,'params':{}};</script><script src="https://balkliving.com/8d8437eb8e7c97a70d4f2efd5f13f0c0/invoke.js"></script></div>
+<div class="ad-slot"><div class="banner-label">Ad Slot #6</div><script>atOptions={'key':'be4dff40e94219a60bf289a7a65bd083','format':'iframe','height':300,'width':160,'params':{}};</script><script src="https://balkliving.com/be4dff40e94219a60bf289a7a65bd083/invoke.js"></script></div>
+<div class="ad-slot"><div class="banner-label">Ad Slot #7</div><script>atOptions={'key':'2180d3147d5aa2a94048ad63a1cdfa9c','format':'iframe','height':50,'width':320,'params':{}};</script><script src="https://balkliving.com/2180d3147d5aa2a94048ad63a1cdfa9c/invoke.js"></script></div>
+<div class="ad-slot"><div class="banner-label">Ad Slot #8</div><script>atOptions={'key':'8d8437eb8e7c97a70d4f2efd5f13f0c0','format':'iframe','height':60,'width':468,'params':{}};</script><script src="https://balkliving.com/8d8437eb8e7c97a70d4f2efd5f13f0c0/invoke.js"></script></div>
+<div class="ad-slot"><div class="banner-label">Ad Slot #9</div><script>atOptions={'key':'be4dff40e94219a60bf289a7a65bd083','format':'iframe','height':300,'width':160,'params':{}};</script><script src="https://balkliving.com/be4dff40e94219a60bf289a7a65bd083/invoke.js"></script></div>
+<div class="ad-slot"><div class="banner-label">Ad Slot #10</div><script>atOptions={'key':'2180d3147d5aa2a94048ad63a1cdfa9c','format':'iframe','height':50,'width':320,'params':{}};</script><script src="https://balkliving.com/2180d3147d5aa2a94048ad63a1cdfa9c/invoke.js"></script></div>
 </div>
 </div>
 
 <script>
+// বিফ সাউন্ডের জন্য ফাংশন
+function playBeep() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(880, audioCtx.currentTime); 
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.5);
+    } catch(e) { console.log("Audio play failed"); }
+}
+
 const TASK_LINKS = [
 "https://www.effectivegatecpm.com/v2ykpumtbq?key=64156c1601c9777a06bb9a9680063aa5_1",
 "https://www.effectivegatecpm.com/et4fr64f?key=9e0e21656b3af8b9eb6e6f35e7658ee3_2",
@@ -104,20 +129,6 @@ let isTabActive = true;
 let currentAnswer = 0;
 
 document.addEventListener("visibilitychange", () => { isTabActive = !document.hidden; });
-
-// ফাংশন: বিফ সাউন্ড তৈরি
-function playBeep() {
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-    oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); // Frequency in Hz
-    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-    oscillator.start();
-    oscillator.stop(audioCtx.currentTime + 0.5); // 0.5 সেকেন্ড বাজবে
-}
 
 function buildUI() {
 const grid = document.getElementById('task-grid');
@@ -155,7 +166,7 @@ let passed = 0;
 btn.disabled = true;
 
 const timer = setInterval(() => {
-if (!isTabActive) {
+if (!isTabActive) { 
 passed++;
 btn.innerText = `Analyzing... ${timeNeeded - passed}s`;
 warn.style.display = 'none';
@@ -165,7 +176,7 @@ btn.innerText = "Paused! Go back to Ad";
 }
 if (passed >= timeNeeded) {
 clearInterval(timer);
-playBeep(); // <--- এখানে সাউন্ড বাজবে
+playBeep(); // <--- টাইমার শেষে বিফ সাউন্ড বাজবে
 btn.style.display = 'none';
 warn.style.display = 'none';
 setTimeout(() => showMath(index), 500);
@@ -203,6 +214,8 @@ document.getElementById('final-code').innerText = code;
 function resetAll() { localStorage.clear(); location.reload(); }
 buildUI();
 </script>
+
+<script src="https://balkliving.com/64/6c/5e/646c5ef6f88ac045448d749a8e047fca.js"></script>
 
 </body>
 </html>
