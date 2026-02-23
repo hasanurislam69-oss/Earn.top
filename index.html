@@ -59,7 +59,7 @@ atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', '
 <h2>🚀 Premium Reward Center</h2>
 <p class="sub-text">কমপ্লিট করুন ২০টি টাস্ক এবং হিউম্যান ভেরিফিকেশন।</p>
 
-<div id="task-container"></div>
+<div id="task-grid" class="grid"></div>
 
 <div id="final-section">
 <h3>🎉 অভিনন্দন! কোডটি নিচে দেওয়া হলো।</h3>
@@ -71,11 +71,26 @@ atOptions = { 'key' : 'c1ff4e74e792a1739c0b5bb9931163f8', 'format' : 'iframe', '
 
 <script>
 const TASK_LINKS = [
-"https://bit.ly/3ZLZPNd_1", "https://bit.ly/4qNFd20_2", "https://bit.ly/4rP0CcJ_3", "https://bit.ly/4c8Acxn_4",
-"https://bit.ly/3OlTrtE_5", "https://bit.ly/3OTWRDU_6", "https://bit.ly/4b3AnsP_7", "https://bit.ly/3OCTlxG_8",
-"https://bit.ly/4kXuwZC_9", "https://bit.ly/4kOcTeH_10", "https://bit.ly/3ZMFiYX_11", "https://bit.ly/4c7jb6T_12",
-"https://bit.ly/4qOCchQ_13", "https://bit.ly/4s1Gdk5_14", "https://bit.ly/46hu3LM_15", "https://bit.ly/46hohJZ_16",
-"https://bit.ly/4awuWCE_17", "https://bit.ly/4ruU9Dk_18", "https://bit.ly/4kOdayf_19", "https://bit.ly/4aMfIs8_20"
+"https://www.effectivegatecpm.com/v2ykpumtbq?key=64156c1601c9777a06bb9a9680063aa5_1",
+"https://www.effectivegatecpm.com/et4fr64f?key=9e0e21656b3af8b9eb6e6f35e7658ee3_2",
+"https://www.effectivegatecpm.com/ghskuqf4?key=0b0f70bbafd0da9bbd6497a73de36a16_3",
+"https://www.effectivegatecpm.com/uutttvqn3?key=6df72f6fda8e8179b3552dc7ce3483eb_4",
+"https://www.effectivegatecpm.com/z573rm7p?key=7b0d002d8d8e1fbf3e3db56c350c3b36_5",
+"https://www.effectivegatecpm.com/y3rsfj65nf?key=44b57104a36377c1f05bb5a45204d137_6",
+"https://www.effectivegatecpm.com/v0nxwfsecj?key=8c4ef9348a44009983a8f0b529b595fd_7",
+"https://www.effectivegatecpm.com/rp1ik15t?key=f8c385df8f28dee235ecbeb994079ed4_8",
+"https://www.effectivegatecpm.com/d3racg2f?key=3869a35e6e041149fa9bbf299108ce3a_9",
+"https://www.effectivegatecpm.com/fx2cnr3n41?key=483351e0eff737bf7b151b56a09ff046_10",
+"https://www.effectivegatecpm.com/pfwfq5e999?key=30f2fdcc970e4f1e0dfbf1fe136dc40b_11",
+"https://www.effectivegatecpm.com/he1aimdkv0?key=580dc8cb21cdf7cc86ba7623bb0c0040_12",
+"https://www.effectivegatecpm.com/h8q3ih2gu?key=3335bdf1429cf84ddcf658b2a09ade1f_13",
+"https://www.effectivegatecpm.com/k5wn862a?key=e91eef53ee80c6aca41ed4b91e5882d0_14",
+"https://www.effectivegatecpm.com/xzq9ch8g?key=e04ca928e03d740bcf6f948650f74aea_15",
+"https://www.effectivegatecpm.com/hitvbts0an?key=9e53fdb5297ce39a064008e4ba7e82a1_16",
+"https://www.effectivegatecpm.com/n4ed7c39rv?key=0a44a8ffdbbe4bdb185e466f8b416110_17",
+"https://www.effectivegatecpm.com/j1s578pk?key=4546ff89eb8e6fbd51f2413087eb639d_18",
+"https://www.effectivegatecpm.com/ub346upf5x?key=03e2e4060da55b395d4f45294500d25b_19",
+"https://www.effectivegatecpm.com/hz2ddukd?key=2536f15fbdd4ecf61e3f99487bf61e73_20"
 ];
 
 let currentTaskIndex = parseInt(localStorage.getItem('user_task_step')) || 0;
@@ -97,7 +112,7 @@ oscillator.start();
 oscillator.stop(audioCtx.currentTime + 0.5);
 }
 
-// আপনার দেওয়া ৫টি নতুন অ্যাড কোড এখানে রিপ্লেস করা হয়েছে
+// Banner ads function from Project 1
 function getBannerAds() {
 return `
 <div class="ad-slot">
@@ -132,8 +147,8 @@ return `
 }
 
 function buildUI() {
-const container = document.getElementById('task-container');
-container.innerHTML = '';
+const grid = document.getElementById('task-grid');
+grid.innerHTML = '';
 TASK_LINKS.forEach((link, i) => {
 const isDone = i < currentTaskIndex;
 const card = document.createElement('div');
@@ -151,11 +166,14 @@ ${isDone ? '✅ Done' : 'Start Task'}
 <button onclick="verifyMath(${i})">Verify</button>
 </div>
 </div>`;
-container.appendChild(card);
+grid.appendChild(card);
+
+// Adding Ads after every 2 tasks (from Project 1 logic)
 if ((i + 1) % 2 === 0) {
 const adWrapper = document.createElement('div');
+adWrapper.style.gridColumn = "1 / -1"; // Makes ad span full width in grid
 adWrapper.innerHTML = getBannerAds() + getNativeAd();
-container.appendChild(adWrapper);
+grid.appendChild(adWrapper);
 }
 });
 if (currentTaskIndex >= TASK_LINKS.length) showFinal();
@@ -209,7 +227,7 @@ alert("Wrong! Try again.");
 
 function showFinal() {
 document.getElementById('final-section').style.display = 'block';
-document.getElementById('task-container').style.display = 'none';
+document.getElementById('task-grid').style.display = 'none';
 let code = localStorage.getItem('final_reward_code') || ("PRO-" + Math.random().toString(36).substr(2, 9).toUpperCase());
 localStorage.setItem('final_reward_code', code);
 document.getElementById('final-code').innerText = code;
